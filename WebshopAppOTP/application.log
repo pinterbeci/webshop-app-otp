@@ -1122,3 +1122,11 @@ máj. 20, 2023 9:45:55 DE logger.WebshopLogger init
 WARNING: Warning message
 máj. 20, 2023 9:45:55 DE logger.WebshopLogger init
 INFO: Serious message
+máj. 20, 2023 9:51:59 DE logger.WebshopLogger init
+INFO: WebshopLogger initialized!
+máj. 20, 2023 9:51:59 DE logger.WebshopLogger init
+INFO: Information message
+máj. 20, 2023 9:51:59 DE logger.WebshopLogger init
+WARNING: Warning message
+máj. 20, 2023 9:51:59 DE logger.WebshopLogger init
+INFO: Serious message
