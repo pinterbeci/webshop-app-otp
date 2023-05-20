@@ -1,9 +1,7 @@
 package service;
 
-import model.Customer;
-import model.Payment;
-import model.Purchase;
-import model.WebshopEntity;
+import emuration.PaymentMode;
+import model.*;
 import validator.CSVLineValidator;
 import validator.WebshopEntityValidator;
 
@@ -163,6 +161,8 @@ public class WebshopService {
                     }
                 }
             }
+        } else {
+            logger.log(Level.SEVERE, "Hiba a 'report01' során");
         }
         return purchaseList;
     }
@@ -177,24 +177,110 @@ public class WebshopService {
                         returnValue.add(purchase);
                 }
             }
+        } else {
+            logger.log(Level.SEVERE, "Hiba a 'top' report során");
         }
         return returnValue;
     }
 
-    public List<WebshopEntity> report02(List<WebshopEntity> entityList) {
+    public List<WebshopReport> report02(List<WebshopEntity> entityList) {
+        List<WebshopReport> returnValue = new ArrayList<>();
+        WebshopReport webshopReport = null;
+        boolean hasWebshopIdInReturnValue = false;
+        if (!entityList.isEmpty()) {
+            for (WebshopEntity webshopEntity : entityList) {
 
+                if (!returnValue.isEmpty()) {
+
+                    hasWebshopIdInReturnValue = returnValue.stream()
+                            .anyMatch(webshopReport1 -> webshopReport1.getWebshopId()
+                                    .equals(webshopEntity.getWebshopId()));
+                }
+                if (!hasWebshopIdInReturnValue) {
+                    for (WebshopReport report : returnValue) {
+                        if (report.getWebshopId().equals(webshopEntity.getWebshopId())) {
+                                if ( report.getPaymentMode().equals(PaymentMode.CARD.getName())) {
+                                    report.setPriceByCard(report.getPriceByCard() + webshopEntity.getPrice());
+                                }
+                                if (report.getPaymentMode().equals(PaymentMode.TRANSFER.getName())) {
+                                    report.setPrice(report.getPrice() + webshopEntity.getPrice());
+                                }
+                        }
+                    }
+                }
+                if (webshopEntity instanceof Payment) {
+                    if (((Payment) webshopEntity).getPaymentMode().equals(PaymentMode.CARD.getName())) {
+                        webshopReport = new WebshopReport();
+                        webshopReport.setPriceByCard(webshopEntity.getPrice());
+                        webshopReport.setWebshopId(webshopEntity.getWebshopId());
+                        webshopReport.setPayDate(PaymentMode.CARD.getName());
+                        returnValue.add(webshopReport);
+                    }
+                    if (((Payment) webshopEntity).getPaymentMode().equals(PaymentMode.TRANSFER.getName())) {
+                        webshopReport = new WebshopReport();
+                        webshopReport.setPrice(webshopEntity.getPrice());
+                        webshopReport.setWebshopId(webshopEntity.getWebshopId());
+                        webshopReport.setPayDate(PaymentMode.TRANSFER.getName());
+                        returnValue.add(webshopReport);
+                    }
+                }
+            }
+        } else {
+            logger.log(Level.SEVERE, "Hiba a 'report02' során");
+        }
+        return returnValue;
+    }
+
+
+    private boolean webshopIdExist(List<WebshopEntity> webshopEntityList, String webshopId) {
+        for (WebshopEntity webshopEntity : webshopEntityList) {
+            if (webshopEntity.getWebshopId().equals(String.valueOf(webshopEntity)))
+                return true;
+        }
+        return false;
+    }
+
+    private long amountOfSpendingByPaymentMode(PaymentMode paymentMode, List<WebshopEntity> entityList, String webshopId) {
+        long returnValue = 0;
+        switch (paymentMode) {
+            case CARD:
+                for (WebshopEntity entity : entityList) {
+                    if (entity instanceof Payment) {
+                        if (((Payment) entity).getWebshopId().equals(webshopId)) {
+                            if (PaymentMode.CARD.getName().equals(((Payment) entity).getPaymentMode())) {
+
+                                returnValue += Long.parseLong(entity.getPrice());
+                            }
+                        }
+                    }
+                }
+                break;
+            case TRANSFER:
+                for (WebshopEntity entity : entityList) {
+                    if (entity instanceof Payment) {
+                        if (((Payment) entity).getWebshopId().equals(webshopId)) {
+                            if (PaymentMode.TRANSFER.getName().equals(((Payment) entity).getPaymentMode())) {
+                                returnValue += Long.parseLong(entity.getPrice());
+                            }
+                        }
+                    }
+                }
+                break;
+        }
+        return returnValue;
     }
 
     private List<String> mostSpentAmounts(List<Purchase> purchaseList) {
         TreeSet<Long> amountSet = new TreeSet<>();
         List<String> returnValue = new ArrayList<>();
-        int i = 0;
         for (Purchase purchase : purchaseList) {
             amountSet.add(Long.parseLong(purchase.getAmountOfSpent()));
         }
         returnValue.add(Long.toString(amountSet.last()));
         amountSet.pollLast();
-        returnValue.add(Long.toString(amountSet.last()));
+        if (!amountSet.isEmpty()) {
+            returnValue.add(Long.toString(amountSet.last()));
+        }
         return returnValue;
     }
 

@@ -2,6 +2,7 @@ package csv.handler;
 
 import model.Purchase;
 import model.WebshopEntity;
+import model.WebshopReport;
 import service.WebshopService;
 
 import java.io.BufferedReader;
@@ -39,8 +40,14 @@ public class CSVReader {
             }
 
             if( !dataMap.isEmpty()){
+                CSVWriter csvWriter = new CSVWriter();
                 List<Purchase> report01List = webshopService.report01(dataMap);
                 List<Purchase> topReportList = webshopService.top(report01List);
+                List<WebshopReport> webshopReport = webshopService.report02(paymentList);
+
+                csvWriter.writeReport01DataToFile(report01List);
+                csvWriter.writeTopReportDataToFile(topReportList);
+                csvWriter.writeReport02DataToFile(webshopReport);
             }
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Hiba a fájlok beolvasása során!", e);
