@@ -1,5 +1,6 @@
 package csv.handler;
 
+import logger.WebshopLogger;
 import model.WebshopEntity;
 import service.WebshopService;
 
@@ -15,7 +16,7 @@ public class CSVReader {
 
     private static final Logger logger = Logger.getLogger(CSVReader.class.getName());
 
-    public Map<String, List<WebshopEntity>> read() throws Exception {
+    public Map<String, List<WebshopEntity>> read() {
         Map<String, List<WebshopEntity>> dataMap = new HashMap<>();
 
         try (BufferedReader customerFileBR = new BufferedReader(new FileReader("d:\\Projects\\Java SE\\WebshopAppOTP\\data\\customer.csv"));
