@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 
 public class WebshopService {
 
+    private List<WebshopEntity> customerList;
+    private List<WebshopEntity> paymentList;
     private static final Logger logger = Logger.getLogger(WebshopService.class.getName());
 
     public WebshopEntity createWebshopEntity(String[] line, boolean isCustomerData) throws ParseException {
@@ -63,24 +65,60 @@ public class WebshopService {
             paymentList = new ArrayList<>();
             paymentList.add(entity);
         } else {
-            if (WebshopEntityValidator.isValidPaymentCustomerId(paymentList, entity.getCustomerId())) {
-                if (WebshopEntityValidator.isValidPaymentMode(entity.getPaymentMode())) {
-                    paymentList.add(entity);
-                    return paymentList;
-                }
+            if (WebshopEntityValidator.isValidPaymentMode(entity.getPaymentMode())) {
+                paymentList.add(entity);
+                return paymentList;
             }
         }
+
         return paymentList;
     }
 
-    public List<WebshopEntity> addNewWebshopEntity(List<WebshopEntity> webshopEntityList, WebshopEntity entity) {
-
+    public List<WebshopEntity> addNewWebshopEntity(List<WebshopEntity> webshopEntityList, List<WebshopEntity> customerEntityList, WebshopEntity entity) {
         if (entity instanceof Customer) {
             return addNewCustomerEntity(webshopEntityList, (Customer) entity);
         }
         if (entity instanceof Payment) {
-            return addNewPaymentEntity(webshopEntityList, (Payment) entity);
+            if (!customerEntityList.isEmpty()) {
+                boolean isValidPaymentCustomerId = customerEntityList.stream().anyMatch(currentCustomer -> (entity.getCustomerId()).equals(currentCustomer.getCustomerId()));
+                if (isValidPaymentCustomerId) {
+                    return addNewPaymentEntity(webshopEntityList, (Payment) entity);
+                }
+            }
         }
         return new ArrayList<>();
+    }
+
+    public WebshopEntity getEntityByCustomerId(List<WebshopEntity> entityList, String customerId) {
+        for (WebshopEntity webshopEntity : entityList) {
+            if (webshopEntity.getCustomerId().equals(customerId))
+                return webshopEntity;
+        }
+        return null;
+    }
+
+    public List<WebshopEntity> getPaymentEntityListByCustomerId(List<WebshopEntity> entityList, String customerId) {
+        List<WebshopEntity> returnValue = new ArrayList<>();
+        for (WebshopEntity webshopEntity : entityList) {
+            if (webshopEntity.getCustomerId().equals(customerId))
+                returnValue.add(webshopEntity);
+        }
+        return returnValue;
+    }
+
+    public List<WebshopEntity> getCustomerList() {
+        return customerList;
+    }
+
+    public void setCustomerList(List<WebshopEntity> customerList) {
+        this.customerList = customerList;
+    }
+
+    public List<WebshopEntity> getPaymentList() {
+        return paymentList;
+    }
+
+    public void setPaymentList(List<WebshopEntity> paymentList) {
+        this.paymentList = paymentList;
     }
 }

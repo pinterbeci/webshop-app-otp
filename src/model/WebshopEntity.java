@@ -1,11 +1,19 @@
 package model;
 
 public interface WebshopEntity {
-    public String getWebshopId() ;
+    String getWebshopId();
 
-    public void setWebshopId(String webshopId) ;
+    void setWebshopId(String webshopId);
 
-    public String getCustomerId() ;
+    String getCustomerId();
 
-    public void setCustomerId(String webshopId) ;
+    void setCustomerId(String webshopId);
+
+    default String getPrice() {
+        return "";
+    }
+
+    default void setPrice(String price) {
+
+    }
 }

@@ -1,6 +1,6 @@
 package csv.handler;
 
-import logger.WebshopLogger;
+import model.Purchase;
 import model.WebshopEntity;
 import service.WebshopService;
 
@@ -22,17 +22,18 @@ public class CSVReader {
         try (BufferedReader customerFileBR = new BufferedReader(new FileReader("d:\\Projects\\Java SE\\WebshopAppOTP\\data\\customer.csv"));
              BufferedReader paymentFileBR = new BufferedReader(new FileReader("d:\\Projects\\Java SE\\WebshopAppOTP\\data\\payments.csv"))) {
 
-            List<WebshopEntity> customerList = createDataList(customerFileBR, true);
-            List<WebshopEntity> paymentList = createDataList(paymentFileBR, false);
-
+            List<WebshopEntity> customerList = createDataList(customerFileBR, null, true);
+            webshopService.setCustomerList(customerList);
+            List<WebshopEntity> paymentList = createDataList(paymentFileBR, webshopService.getCustomerList(), false);
+            webshopService.setPaymentList(paymentList);
             if (!customerList.isEmpty()) {
                 dataMap.put("customerData", customerList);
-            }else{
+            } else {
                 logger.log(Level.SEVERE, "Nem sikerült elmenteni a 'customerList'-et!");
             }
             if (!paymentList.isEmpty()) {
                 dataMap.put("paymentData", paymentList);
-            }else{
+            } else {
                 logger.log(Level.SEVERE, "Nem sikerült elmenteni a 'paymentList'-et!");
             }
         } catch (Exception e) {
@@ -41,19 +42,30 @@ public class CSVReader {
         return dataMap;
     }
 
-    private List<WebshopEntity> createDataList(BufferedReader fileReader, boolean isCustomerData) {
+    private List<WebshopEntity> createDataList(BufferedReader fileReader, List<WebshopEntity> customerList, boolean isCustomerData) {
         List<WebshopEntity> returnValue = new ArrayList<>();
         String line;
         try {
             while ((line = fileReader.readLine()) != null) {
                 String[] data = line.split(";");
                 WebshopEntity currentEntity = webshopService.createWebshopEntity(data, isCustomerData);
-                returnValue = webshopService.addNewWebshopEntity(returnValue, currentEntity);
+                List<WebshopEntity> webshopEntityList = webshopService.addNewWebshopEntity(returnValue, customerList, currentEntity);
+                boolean isEmptyWebshopEntityList = webshopEntityList.isEmpty();
+
+                if (!isEmptyWebshopEntityList) {
+                    returnValue = webshopEntityList;
+                }
             }
             return returnValue;
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Hiba az adatok mentése során!", e);
         }
         return Collections.emptyList();
+    }
+
+    public List<WebshopEntity> report1(Map<String, List<WebshopEntity>> dataMap){
+        Purchase purchase = new Purchase();
+
+        return null;
     }
 }

@@ -12,12 +12,16 @@ public class WebshopEntityValidator {
 
     public static boolean isValidCustomerCustomerId(List<WebshopEntity> dataList, String currentId) {
         logger.info("Customer custormerId validálása customerId:" + currentId);
-        return dataList.stream().anyMatch(currentElement -> !(currentId).equals(currentElement.getCustomerId()));
+        for (WebshopEntity webshopEntity : dataList) {
+            if (webshopEntity.getCustomerId().equals(currentId))
+                return false;
+        }
+        return true;
     }
 
-    public static boolean isValidPaymentCustomerId(List<WebshopEntity> dataList, String currentId) {
+    public static boolean isValidPaymentCustomerId(List<WebshopEntity> customerList, String currentId) {
         logger.info("Payment custormerId validálása customerId:" + currentId);
-        return dataList.stream().anyMatch(currentElement -> !(currentId).equals(currentElement.getCustomerId()));
+        return customerList.stream().anyMatch(entity -> (currentId).equals(entity.getCustomerId()));
     }
 
     public static boolean isValidPaymentMode(String paymentMode) {
