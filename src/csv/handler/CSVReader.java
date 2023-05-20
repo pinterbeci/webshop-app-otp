@@ -5,14 +5,15 @@ import service.WebshopService;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class CSVReader {
 
     private final WebshopService webshopService = new WebshopService();
+
+    private static final Logger logger = Logger.getLogger(CSVReader.class.getName());
 
     public Map<String, List<WebshopEntity>> read() throws Exception {
         Map<String, List<WebshopEntity>> dataMap = new HashMap<>();
@@ -23,16 +24,23 @@ public class CSVReader {
             List<WebshopEntity> customerList = createDataList(customerFileBR, true);
             List<WebshopEntity> paymentList = createDataList(paymentFileBR, false);
 
-            dataMap.put("paymentData", paymentList);
-            dataMap.put("customerData", customerList);
+            if (!customerList.isEmpty()) {
+                dataMap.put("customerData", customerList);
+            }else{
+                logger.log(Level.SEVERE, "Nem sikerült elmenteni a 'customerList'-et!");
+            }
+            if (!paymentList.isEmpty()) {
+                dataMap.put("paymentData", paymentList);
+            }else{
+                logger.log(Level.SEVERE, "Nem sikerült elmenteni a 'paymentList'-et!");
+            }
         } catch (Exception e) {
-            //log üzenet
-            throw new Exception("Hiba a fájl/fáljok beolvasá során!");
+            logger.log(Level.SEVERE, "Hiba a fájlok beolvasása során!", e);
         }
         return dataMap;
     }
 
-    private List<WebshopEntity> createDataList(BufferedReader fileReader, boolean isCustomerData) throws Exception {
+    private List<WebshopEntity> createDataList(BufferedReader fileReader, boolean isCustomerData) {
         List<WebshopEntity> returnValue = new ArrayList<>();
         String line;
         try {
@@ -43,8 +51,8 @@ public class CSVReader {
             }
             return returnValue;
         } catch (Exception e) {
-            //logger
-            throw new Exception("Hiba a fájl beolvasása során!");
+            logger.log(Level.SEVERE, "Hiba az adatok mentése során!", e);
         }
+        return Collections.emptyList();
     }
 }

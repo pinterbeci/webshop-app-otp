@@ -8,7 +8,7 @@ import java.util.logging.SimpleFormatter;
 
 
 public class WebshopLogger {
-    private static final Logger logger = Logger.getLogger("WebshopLogger");
+    private static final Logger logger = Logger.getLogger(WebshopLogger.class.getName());
 
     public static void init() {
         FileHandler fileHandler;
@@ -19,9 +19,9 @@ public class WebshopLogger {
             SimpleFormatter formatter = new SimpleFormatter();
             fileHandler.setFormatter(formatter);
 
-            logger.info("Logging initialized");
+            logger.info("WebshopLogger initialized!");
         } catch (Exception e) {
-            logger.log(Level.WARNING, "Exception:", e);
+            logger.log(Level.SEVERE, "Exception:", e);
         }
     }
 }

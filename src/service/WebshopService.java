@@ -10,8 +10,12 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class WebshopService {
+
+    private static final Logger logger = Logger.getLogger(WebshopService.class.getName());
 
     public WebshopEntity createWebshopEntity(String[] line, boolean isCustomerData) throws ParseException {
         if (CSVLineValidator.validCSVLine(line, isCustomerData)) {
@@ -22,6 +26,7 @@ public class WebshopService {
                 customer.setCustomerId(lineArray.get(1));
                 customer.setCustomerName(lineArray.get(2));
                 customer.setCustomerAddress(lineArray.get(3));
+                logger.info("Új Customer objektum létrehozása");
                 return customer;
             } else {
                 Payment payment = new Payment();
@@ -31,12 +36,14 @@ public class WebshopService {
                 payment.setPrice(lineArray.get(3));
                 payment.setBankAccountNumber(lineArray.get(4));
                 payment.setCardNumber(lineArray.get(5));
-
                 payment.setPayDate(lineArray.get(6));
+                logger.info("Új Payment objektum létrehozása");
                 return payment;
             }
         } else
-            return null;
+            logger.log(Level.WARNING, "Nem sikerült létrehozni az új WesbhopEntity objektumot");
+        return null;
+
     }
 
     private List<WebshopEntity> addNewCustomerEntity(List<WebshopEntity> customerList, Customer entity) {
