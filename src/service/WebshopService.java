@@ -2,6 +2,7 @@ package service;
 
 import model.Customer;
 import model.Payment;
+import model.Purchase;
 import model.WebshopEntity;
 import validator.CSVLineValidator;
 import validator.WebshopEntityValidator;
@@ -10,6 +11,7 @@ import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -97,13 +99,71 @@ public class WebshopService {
         return null;
     }
 
-    public List<WebshopEntity> getPaymentEntityListByCustomerId(List<WebshopEntity> entityList, String customerId) {
+    public List<WebshopEntity> getEntityListByCustomerId(List<WebshopEntity> entityList, String customerId) {
         List<WebshopEntity> returnValue = new ArrayList<>();
         for (WebshopEntity webshopEntity : entityList) {
             if (webshopEntity.getCustomerId().equals(customerId))
                 returnValue.add(webshopEntity);
         }
         return returnValue;
+    }
+
+    public List<Purchase> report01(Map<String, List<WebshopEntity>> dataMap) {
+        List<WebshopEntity> paymentEntityList = new ArrayList<>();
+        List<WebshopEntity> custormerEntityList = new ArrayList<>();
+        List<Purchase> purchaseList = new ArrayList<>();
+        if (!dataMap.isEmpty()) {
+            if (dataMap.containsKey("paymentData") && !dataMap.get("paymentData").isEmpty()) {
+                paymentEntityList = dataMap.get("paymentData");
+            }
+            if (dataMap.containsKey("customerData") && !dataMap.get("customerData").isEmpty()) {
+                custormerEntityList = dataMap.get("customerData");
+            }
+            if (!paymentEntityList.isEmpty()) {
+                for (WebshopEntity entity : paymentEntityList) {
+                    if (hasCustomerInPurchaseList(purchaseList, entity.getCustomerId())) {
+
+                        Purchase purchase = new Purchase();
+                        purchase.setAmountOfSpent(String.valueOf(amounOfPaymentById(paymentEntityList, entity.getCustomerId())));
+                        purchase.setCustomerId(entity.getCustomerId());
+
+                        purchaseList.add(purchase);
+                    }
+                }
+            }
+            if (!custormerEntityList.isEmpty()) {
+                for (WebshopEntity entity : custormerEntityList) {
+                    if (entity instanceof Customer) {
+                        for (Purchase purchase : purchaseList) {
+                            if (purchase.getCustomerId().equals(entity.getCustomerId())) {
+                                purchase.setAddress(((Customer) entity).getCustomerAddress());
+                                purchase.setCustomerName(((Customer) entity).getCustomerName());
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        return purchaseList;
+    }
+
+    private boolean hasCustomerInPurchaseList(List<Purchase> purchaseList, String customerId) {
+        for (Purchase purchase: purchaseList){
+            if((""+customerId).equals(purchase.getCustomerId()))
+                return false;
+        }
+        return true;
+    }
+
+    private long amounOfPaymentById(List<WebshopEntity> entityList, String customerId) {
+        long amountOfPayment = 0;
+        for (WebshopEntity webshopEntity : entityList) {
+            if (webshopEntity.getCustomerId().equals(customerId)) {
+                amountOfPayment += Long.parseLong(webshopEntity.getPrice());
+            }
+        }
+        return amountOfPayment;
     }
 
     public List<WebshopEntity> getCustomerList() {

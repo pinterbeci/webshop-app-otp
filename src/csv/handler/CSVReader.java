@@ -39,6 +39,8 @@ public class CSVReader {
         } catch (Exception e) {
             logger.log(Level.SEVERE, "Hiba a fájlok beolvasása során!", e);
         }
+        //report 01 ready
+        webshopService.report01(dataMap);
         return dataMap;
     }
 
@@ -61,11 +63,5 @@ public class CSVReader {
             logger.log(Level.SEVERE, "Hiba az adatok mentése során!", e);
         }
         return Collections.emptyList();
-    }
-
-    public List<WebshopEntity> report1(Map<String, List<WebshopEntity>> dataMap){
-        Purchase purchase = new Purchase();
-
-        return null;
     }
 }
