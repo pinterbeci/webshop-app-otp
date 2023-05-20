@@ -41,12 +41,12 @@ public class CSVWriter {
     public void writeReport02DataToFile(List<WebshopReport> webshopEntityList) throws IOException {
         PrintWriter writer = new PrintWriter("d:/Projects/Java SE/WebshopAppOTP/data/report02.csv");
 
-        for (WebshopEntity entity : webshopEntityList) {
+        for (WebshopReport entity : webshopEntityList) {
             writer.print(entity.getWebshopId());
             writer.print(";");
             writer.print(entity.getPrice());
             writer.print(";");
-            writer.print(entity.getPrice());
+            writer.print(entity.getPriceByCard());
             writer.println(";");
         }
         writer.close();

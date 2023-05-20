@@ -1,122 +1,94 @@
-máj. 20, 2023 3:46:09 DU logger.WebshopLogger init
+máj. 20, 2023 5:11:15 DU logger.WebshopLogger init
 INFO: WebshopLogger initialized!
-máj. 20, 2023 3:46:09 DU logger.WebshopLogger init
+máj. 20, 2023 5:11:15 DU logger.WebshopLogger init
 INFO: Information message
-máj. 20, 2023 3:46:09 DU logger.WebshopLogger init
+máj. 20, 2023 5:11:15 DU logger.WebshopLogger init
 WARNING: Warning message
-máj. 20, 2023 3:46:09 DU logger.WebshopLogger init
+máj. 20, 2023 5:11:15 DU logger.WebshopLogger init
 INFO: Serious message
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS01, A01, Kovács János, Bp. 1192 Kosárfonó u. 18]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Customer objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS01, A02, Kiss István, Bp. 1149 Vizafogó u. 11]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Customer objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidCustomerCustomerId
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidCustomerCustomerId
 INFO: Customer custormerId validálása customerId:A02
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS02, A02, Pézsma Réka, Vecsés 2221 Káposzta u. 22]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Customer objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidCustomerCustomerId
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidCustomerCustomerId
 INFO: Customer custormerId validálása customerId:A02
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS02, A01, Nagy Ferenc, Bp. 1191 Toldi u. 7]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Customer objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidCustomerCustomerId
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidCustomerCustomerId
 INFO: Customer custormerId validálása customerId:A01
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS01, A04, Hagyma Piroska, Bp. 1117 Tűzkő u. 48]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Customer objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidCustomerCustomerId
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidCustomerCustomerId
 INFO: Customer custormerId validálása customerId:A04
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS01, A03, Nagy Natália, Bp. 1211 Lövölde tér 2]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Customer objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidCustomerCustomerId
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidCustomerCustomerId
 INFO: Customer custormerId validálása customerId:A03
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS02, A03, Szabó Béla, Bp. 1027 Boldog u. 74]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Customer objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidCustomerCustomerId
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidCustomerCustomerId
 INFO: Customer custormerId validálása customerId:A03
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS01, A01, card, 2199, , 4908366099900433, 2021.01.01]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
-INFO: Beolvasott sor validálása: [WS01, A03, card, 987, , 5437588499034201, 2021.01.21]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
-INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
-INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
-INFO: Beolvasott sor validálása: [WS02, A01, card, 12000, , 377947047949679, 2021.01.13]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
-INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
-INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
-INFO: Beolvasott sor validálása: [WS02, A03, card, 2900, 6757619297057019, , 2021.01.21]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
-INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
-INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
-INFO: Beolvasott sor validálása: [WS01, A02, card, 20234, , 377947047949679, 2021.01.11]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
-INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
-INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
-INFO: Beolvasott sor validálása: [WS01, A03, card, 198, , 5437588499034201, 2021.01.182]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
-INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
-INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS01, A04, transfer, 2199, 1179400820544448, , 2021.01.01]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidPaymentMode
 INFO: PaymentMode validálása paymentMode:transfer
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS01, A04, transfer, 987, 1179400820544448, , 2021.01.10]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidPaymentMode
 INFO: PaymentMode validálása paymentMode:transfer
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS02, A04, card, 22000, , 6757619297057019, 2021.01.22]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidPaymentMode
 INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS02, A02, card, 2904, , 4908366099282204, 2021.01.1]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidPaymentMode
 INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS01, A01, card, 42100, , 4908366099900433, 2021.01.11]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidPaymentMode
 INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
 INFO: Beolvasott sor validálása: [WS02, A03, card, 240, , 4908366099147860, 2021.01.18]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Payment objektum létrehozása
-máj. 20, 2023 3:46:09 DU validator.WebshopEntityValidator isValidPaymentMode
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidPaymentMode
 INFO: PaymentMode validálása paymentMode:card
-máj. 20, 2023 3:46:09 DU validator.CSVLineValidator validCSVLine
-INFO: Beolvasott sor validálása: [WS02, A05, card, 240, , 4908366099147860, 2021.01.18]
-máj. 20, 2023 3:46:09 DU service.WebshopService createWebshopEntity
+máj. 20, 2023 5:11:15 DU validator.CSVLineValidator validCSVLine
+INFO: Beolvasott sor validálása: [WS02, A03, card, 240, , 4908366099147860, 2021.01.18]
+máj. 20, 2023 5:11:15 DU service.WebshopService createWebshopEntity
 INFO: Új Payment objektum létrehozása
+máj. 20, 2023 5:11:15 DU validator.WebshopEntityValidator isValidPaymentMode
+INFO: PaymentMode validálása paymentMode:card

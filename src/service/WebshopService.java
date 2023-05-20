@@ -185,89 +185,71 @@ public class WebshopService {
 
     public List<WebshopReport> report02(List<WebshopEntity> entityList) {
         List<WebshopReport> returnValue = new ArrayList<>();
+        long currentPrice = 0;
         WebshopReport webshopReport = null;
-        boolean hasWebshopIdInReturnValue = false;
         if (!entityList.isEmpty()) {
             for (WebshopEntity webshopEntity : entityList) {
+                if (webshopIdExits(returnValue, webshopEntity.getWebshopId())) {
+                    WebshopReport report = getWebshopReportById(returnValue, webshopEntity.getWebshopId());
+                    currentPrice = Long.parseLong(webshopEntity.getPrice());
 
-                if (!returnValue.isEmpty()) {
-
-                    hasWebshopIdInReturnValue = returnValue.stream()
-                            .anyMatch(webshopReport1 -> webshopReport1.getWebshopId()
-                                    .equals(webshopEntity.getWebshopId()));
-                }
-                if (!hasWebshopIdInReturnValue) {
-                    for (WebshopReport report : returnValue) {
-                        if (report.getWebshopId().equals(webshopEntity.getWebshopId())) {
-                                if ( report.getPaymentMode().equals(PaymentMode.CARD.getName())) {
-                                    report.setPriceByCard(report.getPriceByCard() + webshopEntity.getPrice());
-                                }
-                                if (report.getPaymentMode().equals(PaymentMode.TRANSFER.getName())) {
-                                    report.setPrice(report.getPrice() + webshopEntity.getPrice());
-                                }
+                    if (((Payment) webshopEntity).getPaymentMode().equals(PaymentMode.CARD.getName())) {
+                        if (report.getPriceByCard() != null) {
+                            currentPrice += Long.parseLong(report.getPriceByCard());
+                            report.setPriceByCard(String.valueOf(currentPrice));
                         }
                     }
-                }
-                if (webshopEntity instanceof Payment) {
-                    if (((Payment) webshopEntity).getPaymentMode().equals(PaymentMode.CARD.getName())) {
-                        webshopReport = new WebshopReport();
-                        webshopReport.setPriceByCard(webshopEntity.getPrice());
-                        webshopReport.setWebshopId(webshopEntity.getWebshopId());
-                        webshopReport.setPayDate(PaymentMode.CARD.getName());
-                        returnValue.add(webshopReport);
-                    }
                     if (((Payment) webshopEntity).getPaymentMode().equals(PaymentMode.TRANSFER.getName())) {
+
+                        if (report.getPrice() != null) {
+                            currentPrice += Long.parseLong(report.getPrice());
+                            report.setPrice(String.valueOf(currentPrice));
+                        }else{
+                            report.setPrice(String.valueOf(currentPrice));
+                        }
+                    }
+
+                } else {
+                    if (webshopEntity instanceof Payment) {
                         webshopReport = new WebshopReport();
-                        webshopReport.setPrice(webshopEntity.getPrice());
+                        if (((Payment) webshopEntity).getPaymentMode().equals(PaymentMode.CARD.getName())) {
+                            webshopReport.setPriceByCard(webshopEntity.getPrice());
+                        }
+                        if (((Payment) webshopEntity).getPaymentMode().equals(PaymentMode.TRANSFER.getName())) {
+                            webshopReport.setPrice(webshopEntity.getPrice());
+                        }
                         webshopReport.setWebshopId(webshopEntity.getWebshopId());
-                        webshopReport.setPayDate(PaymentMode.TRANSFER.getName());
+                        webshopReport.setPaymentMode(((Payment) webshopEntity).getPaymentMode());
                         returnValue.add(webshopReport);
                     }
                 }
+
             }
+
         } else {
             logger.log(Level.SEVERE, "Hiba a 'report02' során");
         }
         return returnValue;
     }
 
+    private WebshopReport getWebshopReportById(List<WebshopReport> webshopReports, String webshopId) {
+        for (WebshopReport report : webshopReports) {
+            if ((webshopId).equals(report.getWebshopId()))
+                return report;
+        }
+        return null;
+    }
 
-    private boolean webshopIdExist(List<WebshopEntity> webshopEntityList, String webshopId) {
+
+    private boolean webshopIdExits(List<WebshopReport> webshopEntityList, String webshopId) {
+        if (webshopEntityList.isEmpty())
+            return false;
+
         for (WebshopEntity webshopEntity : webshopEntityList) {
-            if (webshopEntity.getWebshopId().equals(String.valueOf(webshopEntity)))
+            if ((webshopId).equals(webshopEntity.getWebshopId()))
                 return true;
         }
         return false;
-    }
-
-    private long amountOfSpendingByPaymentMode(PaymentMode paymentMode, List<WebshopEntity> entityList, String webshopId) {
-        long returnValue = 0;
-        switch (paymentMode) {
-            case CARD:
-                for (WebshopEntity entity : entityList) {
-                    if (entity instanceof Payment) {
-                        if (((Payment) entity).getWebshopId().equals(webshopId)) {
-                            if (PaymentMode.CARD.getName().equals(((Payment) entity).getPaymentMode())) {
-
-                                returnValue += Long.parseLong(entity.getPrice());
-                            }
-                        }
-                    }
-                }
-                break;
-            case TRANSFER:
-                for (WebshopEntity entity : entityList) {
-                    if (entity instanceof Payment) {
-                        if (((Payment) entity).getWebshopId().equals(webshopId)) {
-                            if (PaymentMode.TRANSFER.getName().equals(((Payment) entity).getPaymentMode())) {
-                                returnValue += Long.parseLong(entity.getPrice());
-                            }
-                        }
-                    }
-                }
-                break;
-        }
-        return returnValue;
     }
 
     private List<String> mostSpentAmounts(List<Purchase> purchaseList) {
